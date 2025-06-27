@@ -15,6 +15,8 @@
             --light: #F5F7FA;
             --dark: #2D3748;
             --success: #38A169;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 25px rgba(0,0,0,0.08);
         }
         
         body {
@@ -34,28 +36,62 @@
         
         header {
             background: white;
-            border-radius: 15px;
+            border-radius: var(--border-radius);
             padding: 20px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            box-shadow: var(--box-shadow);
             display: flex;
             align-items: center;
             justify-content: space-between;
             border-bottom: 5px solid var(--secondary);
+            background: linear-gradient(135deg, white 0%, #f8fafc 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 158, 27, 0.1);
+            border-radius: 50%;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(26, 77, 143, 0.1);
+            border-radius: 50%;
         }
         
         .logo-container {
             display: flex;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
         
         .logo {
             height: 80px;
             margin-left: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: rotate(5deg) scale(1.05);
         }
         
         .header-text {
             text-align: right;
+            position: relative;
+            z-index: 1;
         }
         
         h1 {
@@ -63,6 +99,7 @@
             margin: 0;
             font-size: 28px;
             font-weight: 900;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
         }
         
         .subtitle {
@@ -79,10 +116,12 @@
             background: white;
             padding: 10px;
             border-radius: 50px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: var(--box-shadow);
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            position: relative;
+            z-index: 1;
         }
         
         .tab-btn {
@@ -102,6 +141,7 @@
         
         .tab-btn:hover {
             color: var(--primary);
+            transform: translateY(-2px);
         }
         
         .tab-btn.active {
@@ -124,10 +164,6 @@
         
         .week {
             display: none;
-            background-color: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             animation: fadeIn 0.5s ease;
         }
         
@@ -140,11 +176,63 @@
             display: block;
         }
         
+        .day-container {
+            background-color: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            border-top: 3px solid var(--secondary);
+        }
+        
+        .day-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed rgba(26, 77, 143, 0.2);
+        }
+        
+        .day-title {
+            font-weight: 900;
+            color: var(--primary);
+            font-size: 22px;
+            margin: 0;
+        }
+        
+        .day-date {
+            background: var(--light);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .day-date i {
+            margin-left: 5px;
+            color: var(--secondary);
+        }
+        
         table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            margin-top: 20px;
         }
         
         th, td {
@@ -276,6 +364,16 @@
             text-align: center;
             font-size: 18px;
             letter-spacing: 1px;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .rest-time i {
+            margin-left: 10px;
         }
         
         .program-type {
@@ -355,15 +453,16 @@
             border-left: 3px solid #4299E1;
         }
         
-        .day-header {
-            font-weight: 900;
+        .time-badge {
+            background: var(--light);
             color: var(--primary);
-            font-size: 18px;
-        }
-        
-        .date {
-            color: var(--secondary);
-            font-size: 16px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 5px;
+            border: 1px solid rgba(26, 77, 143, 0.2);
         }
         
         .workshop-card {
@@ -374,6 +473,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.03);
             border-left: 4px solid var(--primary);
             transition: all 0.3s ease;
+            position: relative;
         }
         
         .workshop-card:hover {
@@ -381,15 +481,16 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.08);
         }
         
-        .time-badge {
-            background: var(--light);
-            color: var(--primary);
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 700;
-            display: inline-block;
-            margin-top: 5px;
+        .workshop-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
         }
         
         footer {
@@ -399,6 +500,33 @@
             color: var(--dark);
             font-size: 14px;
             border-top: 1px solid rgba(0,0,0,0.1);
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: linear-gradient(135deg, var(--primary) 0%, #2a5ba0 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 5px 20px rgba(26, 77, 143, 0.3);
+            cursor: pointer;
+            z-index: 99;
+            transition: all 0.3s ease;
+        }
+        
+        .floating-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 8px 25px rgba(26, 77, 143, 0.4);
         }
         
         @media (max-width: 768px) {
@@ -436,6 +564,14 @@
                 margin: 15% auto;
                 padding: 20px;
             }
+            
+            .floating-btn {
+                bottom: 20px;
+                left: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
         }
     </style>
 </head>
@@ -458,308 +594,418 @@
         
         <!-- الأسبوع الأول -->
         <div id="week1" class="week active">
-            <table>
-                <thead>
-                    <tr>
-                        <th>اليوم والتاريخ</th>
-                        <th>المجموعة الأولى</th>
-                        <th>المجموعة الثانية</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- اليوم الأول -->
-                    <tr>
-                        <td rowspan="4">
-                            <div class="day-header">الأحد</div>
-                            <div class="date">6 يوليو 2025</div>
-                        </td>
-                        <td>
-                            <div class="workshop-card">
-                                <span class="program-type scientific">علمي</span><br>
-                                <span class="clickable" onclick="showWorkshopInfo('أردوينو', 'من الفكرة إلى الحركة', 'ورشة تعليمية حول استخدام الأردوينو لتحويل الأفكار إلى مشاريع عملية متحركة. سيتعلم المشاركون أساسيات البرمجة والإلكترونيات.', 'أ. مالك المعمري')">أردوينو: من الفكرة إلى الحركة</span><br>
-                                <span class="clickable" onclick="showPresenterInfo('أ. مالك المعمري', 'أستاذ حاسوب متخصص في تقنية المعلومات. لديه خبرة أكثر من.')">أ. مالك المعمري</span><br>
-                                <span class="clickable" onclick="showLocationInfo('قاعة حاسوب', 'قاعة مجهزة بأحدث أجهزة الحاسوب وأدوات البرمجة، تتسع لـ25 مشارك. تحتوي على جميع الأدوات اللازمة لورشات الأردوينو والبرمجة.')">قاعة حاسوب</span><br>
-                                <span class="time-badge">8:00 ص - 9:00 ص</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="workshop-card">
-                                <span class="program-type social">اجتماعي</span><br>
-                                <span class="clickable" onclick="showWorkshopInfo('أنامل تتكلم', 'لغة الإشارة', 'ورشة تهدف إلى تعليم أساسيات لغة الإشارة للتواصل مع ذوي الاحتياجات السمعية. ستساعد المشاركين على فهم عالم الصم وتطوير مهارات التواصل معهم.', 'أ. سعيد المجرفي')">أنامل تتكلم (لغة الإشارة)</span><br>
-                                <span class="clickable" onclick="showPresenterInfo('أ. سعيد المجرفي', 'مترجم لغة إشارة معتمد، يعمل في مجال تعليم لغة الإشارة منذ ... سنوات.  حاصل على عدة شهادات دولية في لغة الإشارة.')">أ. سعيد المجرفي</span><br>
-                                <span class="clickable" onclick="showLocationInfo('قاعة دراسية', 'قاعة دراسية مجهزة بوسائل تعليمية متكاملة، تتسع لـ25 مشارك. مزودة بشاشة عرض كبيرة ووسائل بصرية مساعدة للتعلم.')">قاعة دراسية</span><br>
-                                <span class="time-badge">8:00 ص - 9:00 ص</span>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="workshop-card">
-                                <span class="program-type scout">علمي</span><br>
-                          <span class="clickable" onclick="showWorkshopInfo('أردوينو', 'من الفكرة إلى الحركة', 'ورشة تعليمية حول استخدام الأردوينو لتحويل الأفكار إلى مشاريع عملية متحركة. سيتعلم المشاركون أساسيات البرمجة والإلكترونيات.', 'أ. مالك المعمري')">أردوينو: من الفكرة إلى الحركة</span><br>
-                                <span class="clickable" onclick="showPresenterInfo('أ. مالك المعمري', 'أستاذ حاسوب متخصص في تقنية المعلومات. لديه خبرة أكثر من.')">أ. مالك المعمري</span><br>
-                                <span class="clickable" onclick="showLocationInfo('قاعة حاسوب', 'قاعة مجهزة بأحدث أجهزة الحاسوب وأدوات البرمجة، تتسع لـ25 مشارك. تحتوي على جميع الأدوات اللازمة لورشات الأردوينو والبرمجة.')">قاعة حاسوب</span><br>
-                                <span class="time-badge">9:00 ص - 10:00 ص</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="workshop-card">
-                           <span class="program-type scout">كشفي</span><br>
-                                <span class="clickable" onclick="showWorkshopInfo('فن الكشافة', 'مهارات كشفية', 'ورشة تقدم مهارات كشفية أساسية. الجزء الثاني مع تطبيقات عملية.', 'أ. عادل العبري')">فن الكشافة</span><br>
-                                <span class="clickable" onclick="showPresenterInfo('أ. عادل العبري', 'قائد كشفي معتمد.')">أ. عادل العبري</span><br>
-                                <span class="clickable" onclick="showLocationInfo('مركز المصادر', 'مركز مصادر التعلم.')">مركز المصادر</span><br>
-                                <span class="time-badge">9:00 ص - 10:00 ص</span>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="rest-time" colspan="2">
-                            <div style="padding: 10px;">
-                                <i class="fas fa-coffee"></i> استراحة ☕<br>
-                                10:00 ص - 10:30 ص
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                              <div class="workshop-card">
-                                <span class="program-type social">اجتماعي</span><br>
-                                <span class="clickable" onclick="showWorkshopInfo('أنامل تتكلم', 'لغة الإشارة', 'ورشة تهدف إلى تعليم أساسيات لغة الإشارة للتواصل مع ذوي الاحتياجات السمعية. ستساعد المشاركين على فهم عالم الصم وتطوير مهارات التواصل معهم.', 'أ. سعيد المجرفي')">أنامل تتكلم (لغة الإشارة)</span><br>
-                                <span class="clickable" onclick="showPresenterInfo('أ. سعيد المجرفي', 'مترجم لغة إشارة معتمد، يعمل في مجال تعليم لغة الإشارة منذ ... سنوات.  حاصل على عدة شهادات دولية في لغة الإشارة.')">أ. سعيد المجرفي</span><br>
-                                <span class="clickable" onclick="showLocationInfo('قاعة دراسية', 'قاعة دراسية مجهزة بوسائل تعليمية متكاملة، تتسع لـ25 مشارك. مزودة بشاشة عرض كبيرة ووسائل بصرية مساعدة للتعلم.')">قاعة دراسية</span><br>
-                                <span class="time-badge">10:30 ص - 11:30 ص</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="workshop-card">
-                           <span class="program-type scientific">علمي</span><br>
-                                <span class="clickable" onclick="showWorkshopInfo('أردوينو', 'من الفكرة إلى الحركة', 'ورشة تعليمية حول استخدام الأردوينو لتحويل الأفكار إلى مشاريع عملية متحركة. سيتعلم المشاركون أساسيات البرمجة والإلكترونيات.', 'أ. مالك المعمري')">أردوينو: من الفكرة إلى الحركة</span><br>
-                                <span class="clickable" onclick="showPresenterInfo('أ. مالك المعمري', 'أستاذ حاسوب متخصص في تقنية المعلومات. لديه خبرة أكثر من.')">أ. مالك المعمري</span><br>
-                                <span class="clickable" onclick="showLocationInfo('قاعة حاسوب', 'قاعة مجهزة بأحدث أجهزة الحاسوب وأدوات البرمجة، تتسع لـ25 مشارك. تحتوي على جميع الأدوات اللازمة لورشات الأردوينو والبرمجة.')">قاعة حاسوب</span><br>
-                                <span class="time-badge">10:30 ص - 11:30 ص</span>                    
-                            </div>
-                        </td>
-                    </tr>
-                    
-                    <!-- اليوم الثاني -->
-                    <tr>
-                        <td rowspan="4">
-                            <div class="day-header">الاثنين</div>
-                            <div class="date">7 يوليو 2025</div>
-                        </td>
-                        <td>
-                            <div class="workshop-card">
-                                <span class="program-type sports">رياضي</span><br>
-                                <span class="clickable" onclick="showWorkshopInfo('أسبح بثقة', 'مهارات السباحة الأساسية', 'ورشة لتعليم أساسيات السباحة الآمنة وتطوير الثقة في الماء. ستشمل تمارين عملية في المسبح تحت إشراف مدربين معتمدين.', 'أ. إبراهيم العبري')">أسبح بثقة (مهارات السباحة الأساسية)</span><br>
-                                <span class="clickable" onclick="showPresenterInfo('أ. إبراهيم العبري', 'مدرب سباحة معتمد،.....')">أ. إبراهيم العبري</span><br>
-                                <span class="clickable" onclick="showLocationInfo(' استراحة سافانا', 'استراحة سافانا في منطقة الوهرة تحتوي على مسبح للسباحة. مكان مثالي لتعلم السباحة في بيئة آمنة وممتعة.')">رحلة استراحة سافانا</span><br>
-                                <span class="time-badge">8:00 ص - 9:00 ص</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="workshop-card">
-                                <span class="program-type sports">رياضي</span><br>
-                                <span class="clickable" onclick="showWorkshopInfo('نقلة ذكاء', 'أساسيات الشطرنج', 'ورشة لتعليم أساسيات لعبة الشطرنج وتطوير التفكير الاستراتيجي. ستشمل تمارين عملية وحل ألغاز شطرنجية.', 'أ. حمدان الهنائي')">نقلة ذكاء (أساسيات الشطرنج)</span><br>
-                                <span class="clickable" onclick="showPresenterInfo('أ. حمدان الهنائي', 'لاعب شطرنج محترف، حاصل على بطولة السلطنة للشطرنج . مدرب معتمد من الاتحاد الدولي للشطرنج. درب أكثر من 50 لاعباً واعداً.')">أ. حمدان الهنائي</span><br>
-                                <span class="clickable" onclick="showLocationInfo('رحلة استراحة سافانا', 'استراحة سافانا .')">رحلة استراحة سافانا</span><br>
-                                <span class="time-badge">8:00 ص - 9:00 ص</span>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="workshop-card">
-                                <span class="program-type recreational">ريادي</span><br>
-                                <span class="clickable" onclick="showWorkshopInfo('تربية النحل', 'صناعة العسل', 'ورشة عملية عن تربية النحل واستخراج العسل وإدارة المناحل الصغيرة. ستشمل جولة عملية في مناحل تعليمية.', 'حامد الشبونوتي')">تربية النحل وصناعة العسل</span><br>
-                                <span class="clickable" onclick="showPresenterInfo('حامد الشبونوتي', 'خبير في تربية النحل، يمتلك مزرعة نحل تنتج أكثر من 100 كيلو عسل سنوياً. حاصل على جائزة أفضل عسل طبيعي في المعرض الزراعي.')">حامد الشبونوتي</span><br>
-                                <span class="clickable" onclick="showLocationInfo('رحلة استراحة سافانا', 'منتجع سافانا المائي.')">رحلة استراحة سافانا</span><br>
-                                <span class="time-badge">9:00 ص - 10:00 ص</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="workshop-card">
-                                <span class="program-type scientific">علمي</span><br>
-                                <span class="clickable" onclick="showWorkshopInfo('الرياضيات الحركية', 'تطبيقات رياضية', 'ورشة تقدم الرياضيات بطريقة حركية تفاعلية لتسهيل فهم المفاهيم المجردة. ستشمل ألعاباً وأنشطة حركية تعليمية.', 'أ. درويش الغافري')">الرياضيات الحركية</span><br>
-                                <span class="clickable" onclick="showPresenterInfo('أ. درويش الغافري', 'معلم رياضيات مبدع، حاصل على جائزة المعلم المتميز في تدريس الرياضيات. طور منهجية خاصة لتعليم الرياضيات بطريقة حركية.')">أ. درويش الغافري</span><br>
-                                <span class="clickable" onclick="showLocationInfo('رحلة استراحة سافانا', 'منتجع سافانا المائي.')">رحلة استراحة سافانا</span><br>
-                                <span class="time-badge">9:00 ص - 10:00 ص</span>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="rest-time" colspan="2">
-                            <div style="padding: 10px;">
-                                <i class="fas fa-coffee"></i> استراحة ☕<br>
-                                10:00 ص - 10:30 ص
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="workshop-card">
-                                <span class="program-type sports">رياضي</span><br>
-                                <span class="clickable" onclick="showWorkshopInfo('نقلة ذكاء', 'أساسيات الشطرنج', 'ورشة لتعليم أساسيات لعبة الشطرنج. الجزء الثاني مع تطبيقات عملية.', 'أ. حمدان الهنائي')">نقلة ذكاء (أساسيات الشطرنج)</span><br>
-                                <span class="clickable" onclick="showPresenterInfo('أ. حمدان الهنائي', 'لاعب شطرنج محترف.')">أ. حمدان الهنائي</span><br>
-                                <span class="clickable" onclick="showLocationInfo('رحلة استراحة سافانا', 'منتجع سافانا المائي.')">رحلة استراحة سافانا</span><br>
-                                <span class="time-badge">10:30 ص - 11:30 ص</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="workshop-card">
-                                <span class="program-type sports">رياضي</span><br>
-                                <span class="clickable" onclick="showWorkshopInfo('أسبح بثقة', 'مهارات السباحة الأساسية', 'ورشة لتعليم أساسيات السباحة الآمنة. الجزء الثاني مع تطبيقات عملية.', 'أ. إبراهيم العبري')">أسبح بثقة (مهارات السباحة الأساسية)</span><br>
-                                <span class="clickable" onclick="showPresenterInfo('أ. إبراهيم العبري', 'مدرب سباحة معتمد.')">أ. إبراهيم العبري</span><br>
-                                <span class="clickable" onclick="showLocationInfo('رحلة استراحة سافانا', 'منتجع سافانا المائي.')">رحلة استراحة سافانا</span><br>
-                                <span class="time-badge">10:30 ص - 11:30 ص</span>
+            <!-- يوم الأحد -->
+            <div class="day-container">
+                <div class="day-header">
+                    <h2 class="day-title">الأحد</h2>
+                    <div class="day-date">
+                        <i class="fas fa-calendar-alt"></i> 6 يوليو 2025
+                    </div>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>المجموعة الأولى</th>
+                            <th>المجموعة الثانية</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- الفترة الأولى 8-10 -->
+                        <tr>
+                            <td>
+                                <div class="workshop-card">
+                                    <span class="program-type scientific">علمي</span><br>
+                                    <span class="clickable" onclick="showWorkshopInfo('أردوينو', 'من الفكرة إلى الحركة', 'ورشة تعليمية حول استخدام الأردوينو لتحويل الأفكار إلى مشاريع عملية متحركة. سيتعلم المشاركون أساسيات البرمجة والإلكترونيات.', 'أ. مالك المعمري')">أردوينو: من الفكرة إلى الحركة</span><br>
+                                    <span class="clickable" onclick="showPresenterInfo('أ. مالك المعمري', 'مهندس حاسوب متخصص في الروبوتات والأنظمة المدمجة. لديه خبرة أكثر من 5 سنوات في تدريب الشباب على التقنيات الحديثة. حاصل على عدة جوائز في مجال الابتكار التقني.')">أ. مالك المعمري</span><br>
+                                    <span class="clickable" onclick="showLocationInfo('قاعة حاسوب', 'قاعة مجهزة بأحدث أجهزة الحاسوب وأدوات البرمجة، تتسع لـ20 مشارك. تحتوي على جميع الأدوات اللازمة لورشات الأردوينو والبرمجة.')">قاعة حاسوب</span><br>
+                                    <span class="time-badge">8:00 ص - 10:00 ص</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="workshop-card">
+                                    <span class="program-type social">اجتماعي</span><br>
+                                    <span class="clickable" onclick="showWorkshopInfo('أنامل تتكلم', 'لغة الإشارة', 'ورشة تهدف إلى تعليم أساسيات لغة الإشارة للتواصل مع ذوي الاحتياجات السمعية. ستساعد المشاركين على فهم عالم الصم وتطوير مهارات التواصل معهم.', 'أ. سعيد المجرفي')">أنامل تتكلم (لغة الإشارة)</span><br>
+                                    <span class="clickable" onclick="showPresenterInfo('أ. سعيد المجرفي', 'مترجم لغة إشارة معتمد، يعمل في مجال تعليم لغة الإشارة منذ 7 سنوات. مؤسس مبادرة "يداً بيد" لدعم الصم. حاصل على عدة شهادات دولية في لغة الإشارة.')">أ. سعيد المجرفي</span><br>
+                                    <span class="clickable" onclick="showLocationInfo('قاعة دراسية', 'قاعة دراسية مجهزة بوسائل تعليمية متكاملة، تتسع لـ25 مشارك. مزودة بشاشة عرض كبيرة ووسائل بصرية مساعدة للتعلم.')">قاعة دراسية</span><br>
+                                    <span class="time-badge">8:00 ص - 9:00 ص</span>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <!-- الفترة الثانية 9-10 للمجموعة الأولى فقط -->
+                        <tr>
+                            <td>
+                                <div class="workshop-card">
+                                    <span class="program-type scout">كشفي</span><br>
+                                    <span class="clickable" onclick="showWorkshopInfo('فن الكشافة', 'مهارات كشفية', 'ورشة تقدم مهارات كشفية أساسية مثل العقد والحبال، الملاحة، وإشعال النار بطريقة آمنة. ستساعد المشاركين على تطوير روح الفريق والعمل الجماعي.', 'أ. عادل العبري')">فن الكشافة</span><br>
+                                    <span class="clickable" onclick="showPresenterInfo('أ. عادل العبري', 'قائد كشفي معتمد، قاد العديد من المعسكرات والرحلات الكشفية على مستوى المنطقة. حاصل على وسام القائد المتميز من المنظمة الكشفية العالمية.')">أ. عادل العبري</span><br>
+                                    <span class="clickable" onclick="showLocationInfo('مركز المصادر', 'مركز مصادر التعلم يحتوي على معرض للمهارات الكشفية وأدوات التخييم. مساحة مفتوحة للتدريب العملي على المهارات الكشفية.')">مركز المصادر</span><br>
+                                    <span class="time-badge">9:00 ص - 10:00 ص</span>
+                                </div>
+                            </td>
+                         
+                        </tr>
+                        
+                        <!-- استراحة -->
+                        <tr>
+                            <td colspan="2">
+                                <div class="rest-time">
+                                    <i class="fas fa-coffee"></i> استراحة
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <!-- الفترة الثالثة 10:30-12:30 -->
+                        <tr>
+                            <td>
+                                <div class="workshop-card">
+                                    <span class="program-type scientific">علمي</span><br>
+                                    <span class="clickable" onclick="showWorkshopInfo('أردوينو', 'من الفكرة إلى الحركة', 'ورشة تعليمية حول استخدام الأردوينو لتحويل الأفكار إلى مشاريع عملية متحركة. الجزء الثاني مع تطبيقات عملية.', 'أ. مالك المعمري')">أردوينو: من الفكرة إلى الحركة</span><br>
+                                    <span class="clickable" onclick="showPresenterInfo('أ. مالك المعمري', 'مهندس حاسوب متخصص في الروبوتات والأنظمة المدمجة.')">أ. مالك المعمري</span><br>
+                                    <span class="clickable" onclick="showLocationInfo('قاعة حاسوب', 'قاعة مجهزة بأجهزة حاسوب حديثة.')">قاعة حاسوب</span><br>
+                                    <span class="time-badge">10:30 ص - 12:30 م</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="workshop-card">
+                                    <span class="program-type scout">كشفي</span><br>
+                                    <span class="clickable" onclick="showWorkshopInfo('فن الكشافة', 'مهارات كشفية', 'ورشة تقدم مهارات كشفية أساسية. الجزء الثاني مع تطبيقات عملية.', 'أ. عادل العبري')">فن الكشافة</span><br>
+                                    <span class="clickable" onclick="showPresenterInfo('أ. عادل العبري', 'قائد كشفي معتمد.')">أ. عادل العبري</span><br>
+                                    <span class="clickable" onclick="showLocationInfo('مركز المصادر', 'مركز مصادر التعلم.')">مركز المصادر</span><br>
+                                    <span class="time-badge">10:30 ص - 11:30 ص</span>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <!-- الفترة الرابعة 11:30-12:30 للمجموعة الثانية فقط -->
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="workshop-card">
+                                    <span class="program-type social">اجتماعي</span><br>
+                                    <span class="clickable" onclick="showWorkshopInfo('أنامل تتكلم', 'لغة الإشارة', 'ورشة تهدف إلى تعليم أساسيات لغة الإشارة للتواصل مع ذوي الاحتياجات السمعية. الجزء الثاني من الورشة مع تطبيقات عملية.', 'أ. سعيد المجرفي')">أنامل تتكلم (لغة الإشارة)</span><br>
+                                    <span class="clickable" onclick="showPresenterInfo('أ. سعيد المجرفي', 'مترجم لغة إشارة معتمد، يعمل في مجال تعليم لغة الإشارة منذ 7 سنوات.')">أ. سعيد المجرفي</span><br>
+                                    <span class="clickable" onclick="showLocationInfo('قاعة دراسية', 'قاعة دراسية مجهزة بوسائل تعليمية.')">قاعة دراسية</span><br>
+                                    <span class="time-badge">11:30 ص - 12:30 م</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- يوم الاثنين -->
+            <div class="day-container">
+                <div class="day-header">
+                    <h2 class="day-title">الاثنين</h2>
+                    <div class="day-date">
+                        <i class="fas fa-calendar-alt"></i> 7 يوليو 2025
+                    </div>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>المجموعة الأولى</th>
+                            <th>المجموعة الثانية</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- الفترة الأولى 8-9 -->
+                        <tr>
+                            <td>
+                                <div class="workshop-card">
+                                    <span class="program-type sports">رياضي</span><br>
+                                    <span class="clickable" onclick="showWorkshopInfo('أسبح بثقة', 'مهارات السباحة الأساسية', 'ورشة لتعليم أساسيات السباحة الآمنة وتطوير الثقة في الماء. ستشمل تمارين عملية في المسبح تحت إشراف مدربين معتمدين.', 'أ. إبراهيم العبري')">أسبح بثقة (مهارات السباحة الأساسية)</span><br>
+                                    <span class="clickable" onclick="showPresenterInfo('أ. إبراهيم العبري', 'مدرب سباحة معتمد، حاصل على شهادة إنقاذ من الهلال الأحمر. درب أكثر من 200 متعلم على السباحة الآمنة. بطل سابق في سباقات السباحة المحلية.')">أ. إبراهيم العبري</span><br>
+                                    <span class="clickable" onclick="showLocationInfo('رحلة استراحة سافانا', 'منتجع سافانا المائي، يحتوي على مسابح أولمبية ومناطق ترفيهية. مكان مثالي لتعلم السباحة في بيئة آمنة وممتعة.')">رحلة استراحة سافانا</span><br>
+                                    <span class="time-badge">8:00 ص - 9:00 ص</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="workshop-card">
+                                    <span class="program-type sports">رياضي</span><br>
+                                    <span class="clickable" onclick="showWorkshopInfo('نقلة ذكاء', 'أساسيات الشطرنج', 'ورشة لتعليم أساسيات لعبة الشطرنج وتطوير التفكير الاستراتيجي. ستشمل تمارين عملية وحل ألغاز شطرنجية.', 'أ. حمدان الهنائي')">نقلة ذكاء (أساسيات الشطرنج)</span><br>
+                                    <span class="clickable" onclick="showPresenterInfo('أ. حمدان الهنائي', 'لاعب شطرنج محترف، حاصل على بطولة السلطنة للشطرنج 3 مرات. مدرب معتمد من الاتحاد الدولي للشطرنج. درب أكثر من 50 لاعباً واعداً.')">أ. حمدان الهنائي</span><br>
+                                    <span class="clickable" onclick="showLocationInfo('رحلة استراحة سافانا', 'منتجع سافانا المائي.')">رحلة استراحة سافانا</span><br>
+                                    <span class="time-badge">8:00 ص - 9:00 ص</span>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <!-- الفترة الثانية 9-10 -->
+                        <tr>
+                            <td>
+                                <div class="workshop-card">
+                                    <span class="program-type recreational">ريادي</span><br>
+                                    <span class="clickable" onclick="showWorkshopInfo('تربية النحل', 'صناعة العسل', 'ورشة عملية عن تربية النحل واستخراج العسل وإدارة المناحل الصغيرة. ستشمل جولة عملية في مناحل تعليمية.', 'حامد الشبونوتي')">تربية النحل وصناعة العسل</span><br>
+                                    <span class="clickable" onclick="showPresenterInfo('حامد الشبونوتي', 'خبير في تربية النحل، يمتلك مزرعة نحل تنتج أكثر من 100 كيلو عسل سنوياً. حاصل على جائزة أفضل عسل طبيعي في المعرض الزراعي.')">حامد الشبونوتي</span><br>
+                                    <span class="clickable" onclick="showLocationInfo('رحلة استراحة سافانا', 'منتجع سافانا المائي.')">رحلة استراحة سافانا</span><br>
+                                    <span class="time-badge">9:00 ص - 10:00 ص</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="workshop-card">
+                                    <span class="program-type scientific">علمي</span><br>
+                                    <span class="clickable" onclick="showWorkshopInfo('الرياضيات الحركية', 'تطبيقات رياضية', 'ورشة تقدم الرياضيات بطريقة حركية تفاعلية لتسهيل فهم المفاهيم المجردة. ستشمل ألعاباً وأنشطة حركية تعليمية.', 'أ. درويش الغافري')">الرياضيات الحركية</span><br>
+                                    <span class="clickable" onclick="showPresenterInfo('أ. درويش الغافري', 'معلم رياضيات مبدع، حاصل على جائزة المعلم المتميز في تدريس الرياضيات. طور منهجية خاصة لتعليم الرياضيات بطريقة حركية.')">أ. درويش الغافري</span><br>
+                                    <span class="clickable" onclick="showLocationInfo('رحلة استراحة سافانا', 'منتجع سافانا المائي.')">رحلة استراحة سافانا</span><br>
+                                    <span class="time-badge">9:00 ص - 10:00 ص</span>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <!-- استراحة -->
+                        <tr>
+                            <td colspan="2">
+                                <div class="rest-time">
+                                    <i class="fas fa-coffee"></i> استراحة
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <!-- الفترة الثالثة 10:30-11:30 -->
+                        <tr>
+                            <td>
+                                <div class="workshop-card">
+                                    <span class="program-type sports">رياضي</span><br>
+                                    <span class="clickable" onclick="showWorkshopInfo('نقلة ذكاء', 'أساسيات الشطرنج', 'ورشة لتعليم أساسيات لعبة الشطرنج. الجزء الثاني مع تطبيقات عملية.', 'أ. حمدان الهنائي')">نقلة ذكاء (أساسيات الشطرنج)</span><br>
+                                    <span class="clickable" onclick="showPresenterInfo('أ. حمدان الهنائي', 'لاعب شطرنج محترف.')">أ. حمدان الهنائي</span><br>
+                                    <span class="clickable" onclick="showLocationInfo('رحلة استراحة سافانا', 'منتجع سافانا المائي.')">رحلة استراحة سافانا</span><br>
+                                    <span class="time-badge">10:30 ص - 11:30 ص</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="workshop-card">
+                                    <span class="program-type sports">رياضي</span><br>
+                                    <span class="clickable" onclick="showWorkshopInfo('أسبح بثقة', 'مهارات السباحة الأساسية', 'ورشة لتعليم أساسيات السباحة الآمنة. الجزء الثاني مع تطبيقات عملية.', 'أ. إبراهيم العبري')">أسبح بثقة (مهارات السباحة الأساسية)</span><br>
+                                    <span class="clickable" onclick="showPresenterInfo('أ. إبراهيم العبري', 'مدرب سباحة معتمد.')">أ. إبراهيم العبري</span><br>
+                                    <span class="clickable" onclick="showLocationInfo('رحلة استراحة سافانا', 'منتجع سافانا المائي.')">رحلة استراحة سافانا</span><br>
+                                    <span class="time-badge">10:30 ص - 11:30 ص</span>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <!-- الفترة الرابعة 11:30-12:30 -->
+                        <tr>
+                            <td>
+                                <div class="workshop-card">
+                                    <span class="program-type scientific">
+<span class="clickable" onclick="showWorkshopInfo('الرياضيات الحركية', 'تطبيقات رياضية', 'ورشة تقدم الرياضيات بطريقة حركية تفاعلية. الجزء الثاني مع تطبيقات عملية.', 'أ. درويش الغافري')">الرياضيات الحركية</span>
 
-                            </div>
-                        </td>
-                    </tr> 
-                    </tr>
-                    
-                    <!-- باقي الأيام بنفس النمط -->
-                    <!-- يمكن إضافة الأيام المتبقية بنفس الطريقة -->
-                    
-                </tbody>
-            </table>
-        </div>
-        
-        <!-- الأسبوع الثاني -->
-        <div id="week2" class="week">
-            <table>
-                <thead>
-                    <tr>
-                        <th>اليوم والتاريخ</th>
-                        <th>المجموعة الأولى</th>
-                        <th>المجموعة الثانية</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="3" style="text-align: center; padding: 40px;">
-                            <div style="font-size: 20px; color: var(--primary); margin-bottom: 20px;">
-                                <i class="fas fa-calendar-alt" style="font-size: 40px; color: var(--secondary); margin-bottom: 15px;"></i><br>
-                                جدول الأسبوع الثاني قيد الإعداد
-                            </div>
-                            <p style="color: var(--dark);">سيتم نشر جدول الأسبوع الثاني قريباً بمشيئة الله</p>
-                            <div style="margin-top: 30px; color: var(--secondary); font-weight: 700;">
-                                13 يوليو - 17 يوليو 2025
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+<span class="clickable" onclick="showPresenterInfo('أ. درويش الغافري', 'معلم رياضيات مبدع.')">أ. درويش الغافري</span>
+
+<span class="clickable" onclick="showLocationInfo('رحلة استراحة سافانا', 'منتجع سافانا المائي.')">رحلة استراحة سافانا</span>
+
+<span class="time-badge">11:30 ص - 12:30 م</span>
+</div>
+</td>
+<td>
+<div class="workshop-card">
+<span class="program-type recreational">ريادي</span>
+
+<span class="clickable" onclick="showWorkshopInfo('تربية النحل', 'صناعة العسل', 'ورشة عملية عن تربية النحل. الجزء الثاني مع تطبيقات عملية.', 'حامد الشبونوتي')">تربية النحل وصناعة العسل</span>
+
+<span class="clickable" onclick="showPresenterInfo('حامد الشبونوتي', 'خبير في تربية النحل.')">حامد الشبونوتي</span>
+
+<span class="clickable" onclick="showLocationInfo('رحلة استراحة سافانا', 'منتجع سافانا المائي.')">رحلة استراحة سافانا</span>
+
+<span class="time-badge">11:30 ص - 12:30 م</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+        <!-- باقي أيام الأسبوع بنفس النمط -->
+        <!-- يمكن إضافة الأيام المتبقية (الثلاثاء، الأربعاء، الخميس) بنفس الطريقة -->
+
     </div>
     
-    <!-- Modal للعرض المعلومات -->
-    <div id="infoModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle" class="modal-title">عنوان النافذة</h2>
-            <div id="modalContent">
-                محتوى النافذة سيظهر هنا...
+    <!-- الأسبوع الثاني -->
+    <div id="week2" class="week">
+        <div class="day-container" style="text-align: center; padding: 40px;">
+            <div style="font-size: 20px; color: var(--primary); margin-bottom: 20px;">
+                <i class="fas fa-calendar-alt" style="font-size: 40px; color: var(--secondary); margin-bottom: 15px;"></i><br>
+                جدول الأسبوع الثاني قيد الإعداد
+            </div>
+            <p style="color: var(--dark);">سيتم نشر جدول الأسبوع الثاني قريباً بمشيئة الله</p>
+            <div style="margin-top: 30px; color: var(--secondary); font-weight: 700;">
+                13 يوليو - 17 يوليو 2025
             </div>
         </div>
     </div>
-    
-    <footer>
-        <p>مركز حذيفة بن اليمان الصيفي © 2025 | جميع الحقوق محفوظة</p>
-    </footer>
-    
-    <script>
-        function openWeek(weekId) {
-            // إخفاء جميع الأسابيع
-            document.querySelectorAll('.week').forEach(week => {
-                week.classList.remove('active');
-            });
+</div>
+
+<!-- زر عائم للتواصل -->
+<div class="floating-btn" onclick="showContactModal()">
+    <i class="fas fa-headset"></i>
+</div>
+
+<!-- Modal للعرض المعلومات -->
+<div id="infoModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modalTitle" class="modal-title">عنوان النافذة</h2>
+        <div id="modalContent">
+            محتوى النافذة سيظهر هنا...
+        </div>
+    </div>
+</div>
+
+<!-- Modal للتواصل -->
+<div id="contactModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeContactModal()">&times;</span>
+        <h2 class="modal-title">تواصل معنا</h2>
+        <div style="text-align: center;">
+            <div style="font-size: 60px; color: var(--secondary); margin: 20px 0;">
+                <i class="fas fa-headset"></i>
+            </div>
+            <p style="font-size: 16px; margin-bottom: 25px;">للاستفسارات أو المساعدة، يرجى التواصل معنا عبر:</p>
             
-            // إظهار الأسبوع المحدد
-            document.getElementById(weekId).classList.add('active');
-            
-            // تحديث أزرار التبويب
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.currentTarget.classList.add('active');
-        }
-        
-        function showWorkshopInfo(title, subtitle, description, presenter) {
-            document.getElementById('modalTitle').textContent = title + ": " + subtitle;
-            document.getElementById('modalContent').innerHTML = `
-                <p style="font-size: 16px; line-height: 1.8;"><strong>الوصف:</strong> ${description}</p>
-                ${presenter ? `<p style="font-size: 16px; margin-top: 15px;"><strong style="color: var(--primary);">المحاضر:</strong> ${presenter}</p>` : ''}
-                <div style="margin-top: 20px; padding: 10px; background: rgba(26, 77, 143, 0.05); border-radius: 8px; border-right: 3px solid var(--secondary);">
-                    <strong style="color: var(--primary);">نصائح للاستفادة:</strong>
-                    <ul style="margin-top: 10px; padding-right: 20px;">
-                        <li>احضر قبل الوقت بـ 10 دقائق</li>
-                        <li>احضر معك دفتر ملاحظات</li>
-                        <li>لا تتردد في طرح الأسئلة</li>
-                    </ul>
-                </div>
-            `;
-            document.getElementById('infoModal').style.display = 'block';
-        }
-        
-        function showPresenterInfo(name, bio) {
-            document.getElementById('modalTitle').textContent = "السيرة الذاتية: " + name;
-            document.getElementById('modalContent').innerHTML = `
-                <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                    <div style="width: 80px; height: 80px; background: var(--light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-left: 15px; border: 3px solid var(--secondary);">
-                        <i class="fas fa-user" style="font-size: 30px; color: var(--primary);"></i>
+            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 15px;">
+                <div style="background: rgba(26, 77, 143, 0.1); padding: 15px; border-radius: 10px; width: 200px;">
+                    <div style="font-size: 24px; color: var(--primary); margin-bottom: 10px;">
+                        <i class="fas fa-phone"></i>
                     </div>
-                    <div>
-                        <h3 style="margin: 0; color: var(--primary);">${name}</h3>
-                        <p style="margin: 5px 0 0; color: var(--secondary); font-weight: 500;">محاضر ومدرب معتمد</p>
+                    <h3 style="margin: 0; color: var(--primary);">هاتف</h3>
+                    <p style="margin: 5px 0 0;">+968 1234 5678</p>
+                </div>
+                
+                <div style="background: rgba(255, 158, 27, 0.1); padding: 15px; border-radius: 10px; width: 200px;">
+                    <div style="font-size: 24px; color: var(--secondary); margin-bottom: 10px;">
+                        <i class="fas fa-envelope"></i>
                     </div>
+                    <h3 style="margin: 0; color: var(--secondary);">بريد إلكتروني</h3>
+                    <p style="margin: 5px 0 0;">info@hudhaifa-center.edu.om</p>
                 </div>
-                <p style="font-size: 16px; line-height: 1.8;"><strong>نبذة:</strong> ${bio}</p>
-                <div style="margin-top: 20px; padding: 15px; background: rgba(255, 158, 27, 0.05); border-radius: 8px; border-right: 3px solid var(--secondary);">
-                    <strong style="color: var(--primary);">الشهادات والخبرات:</strong>
-                    <ul style="margin-top: 10px; padding-right: 20px;">
-                        <li>خبرة أكثر من 5 سنوات في مجال التخصص</li>
-                        <li>شهادات معتمدة من جهات محلية ودولية</li>
-                        <li>تدريب أكثر من 100 متدرب</li>
-                    </ul>
-                </div>
-            `;
-            document.getElementById('infoModal').style.display = 'block';
-        }
-        
-        function showLocationInfo(name, description) {
-            document.getElementById('modalTitle').textContent = "مكان الورشة: " + name;
-            document.getElementById('modalContent').innerHTML = `
-                <div style="margin-bottom: 20px;">
-                    <div style="width: 100%; height: 150px; background: var(--light); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; border: 2px dashed var(--secondary);">
-                        <i class="fas fa-map-marker-alt" style="font-size: 50px; color: var(--primary);"></i>
+                
+                <div style="background: rgba(56, 161, 105, 0.1); padding: 15px; border-radius: 10px; width: 200px;">
+                    <div style="font-size: 24px; color: var(--success); margin-bottom: 10px;">
+                        <i class="fas fa-map-marker-alt"></i>
                     </div>
+                    <h3 style="margin: 0; color: var(--success);">موقعنا</h3>
+                    <p style="margin: 5px 0 0;">مسقط، عمان</p>
                 </div>
-                <p style="font-size: 16px; line-height: 1.8;"><strong>الوصف:</strong> ${description}</p>
-                <div style="margin-top: 20px; padding: 15px; background: rgba(232, 63, 63, 0.05); border-radius: 8px; border-right: 3px solid var(--secondary);">
-                    <strong style="color: var(--primary);">إرشادات الوصول:</strong>
-                    <ul style="margin-top: 10px; padding-right: 20px;">
-                        <li>المكان: داخل مركز حذيفة بن اليمان</li>
-                        <li>يوجد لافتات إرشادية</li>
-                        <li>استفسر من المنظمين عند الوصول</li>
-                    </ul>
-                </div>
-            `;
-            document.getElementById('infoModal').style.display = 'block';
-        }
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>مركز حذيفة بن اليمان الصيفي © 2025 | جميع الحقوق محفوظة</p>
+    <div style="margin-top: 15px;">
+        <a href="#" style="color: var(--primary); margin: 0 10px;"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" style="color: var(--primary); margin: 0 10px;"><i class="fab fa-twitter"></i></a>
+        <a href="#" style="color: var(--primary); margin: 0 10px;"><i class="fab fa-instagram"></i></a>
+        <a href="#" style="color: var(--primary); margin: 0 10px;"><i class="fab fa-youtube"></i></a>
+    </div>
+</footer>
+
+<script>
+    function openWeek(weekId) {
+        // إخفاء جميع الأسابيع
+        document.querySelectorAll('.week').forEach(week => {
+            week.classList.remove('active');
+        });
         
-        function closeModal() {
-            document.getElementById('infoModal').style.display = 'none';
-        }
+        // إظهار الأسبوع المحدد
+        document.getElementById(weekId).classList.add('active');
         
-        // إغلاق النافذة عند النقر خارجها
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('infoModal')) {
-                closeModal();
-            }
-        }
-    </script>
+        // تحديث أزرار التبويب
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event.currentTarget.classList.add('active');
+    }
     
-    <!-- Font Awesome for icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-</body>
-</html>
+    function showWorkshopInfo(title, subtitle, description, presenter) {
+        document.getElementById('modalTitle').textContent = title + ": " + subtitle;
+        document.getElementById('modalContent').innerHTML = `
+            <p style="font-size: 16px; line-height: 1.8;"><strong>الوصف:</strong> ${description}</p>
+            ${presenter ? `<p style="font-size: 16px; margin-top: 15px;"><strong style="color: var(--primary);">المحاضر:</strong> ${presenter}</p>` : ''}
+            <div style="margin-top: 20px; padding: 10px; background: rgba(26, 77, 143, 0.05); border-radius: 8px; border-right: 3px solid var(--secondary);">
+                <strong style="color: var(--primary);">نصائح للاستفادة:</strong>
+                <ul style="margin-top: 10px; padding-right: 20px;">
+                    <li>احضر قبل الوقت بـ 10 دقائق</li>
+                    <li>احضر معك دفتر ملاحظات</li>
+                    <li>لا تتردد في طرح الأسئلة</li>
+                </ul>
+            </div>
+        `;
+        document.getElementById('infoModal').style.display = 'block';
+    }
+    
+    function showPresenterInfo(name, bio) {
+        document.getElementById('modalTitle').textContent = "السيرة الذاتية: " + name;
+        document.getElementById('modalContent').innerHTML = `
+            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                <div style="width: 80px; height: 80px; background: var(--light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-left: 15px; border: 3px solid var(--secondary);">
+                    <i class="fas fa-user" style="font-size: 30px; color: var(--primary);"></i>
+                </div>
+                <div>
+                    <h3 style="margin: 0; color: var(--primary);">${name}</h3>
+                    <p style="margin: 5px 0 0; color: var(--secondary); font-weight: 500;">محاضر ومدرب معتمد</p>
+                </div>
+            </div>
+            <p style="font-size: 16px; line-height: 1.8;"><strong>نبذة:</strong> ${bio}</p>
+            <div style="margin-top: 20px; padding: 15px; background: rgba(255, 158, 27, 0.05); border-radius: 8px; border-right: 3px solid var(--secondary);">
+                <strong style="color: var(--primary);">الشهادات والخبرات:</strong>
+                <ul style="margin-top: 10px; padding-right: 20px;">
+                    <li>خبرة أكثر من 5 سنوات في مجال التخصص</li>
+                    <li>شهادات معتمدة من جهات محلية ودولية</li>
+                    <li>تدريب أكثر من 100 متدرب</li>
+                </ul>
+            </div>
+        `;
+        document.getElementById('infoModal').style.display = 'block';
+    }
+    
+    function showLocationInfo(name, description) {
+        document.getElementById('modalTitle').textContent = "مكان الورشة: " + name;
+        document.getElementById('modalContent').innerHTML = `
+            <div style="margin-bottom: 20px;">
+                <div style="width: 100%; height: 150px; background: var(--light); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; border: 2px dashed var(--secondary);">
+                    <i class="fas fa-map-marker-alt" style="font-size: 50px; color: var(--primary);"></i>
+                </div>
+            </div>
+            <p style="font-size: 16px; line-height: 1.8;"><strong>الوصف:</strong> ${description}</p>
+            <div style="margin-top: 20px; padding: 15px; background: rgba(232, 63, 63, 0.05); border-radius: 8px; border-right: 3px solid var(--secondary);">
+                <strong style="color: var(--primary);">إرشادات الوصول:</strong>
+                <ul style="margin-top: 10px; padding-right: 20px;">
+                    <li>المكان: داخل مركز حذيفة بن اليمان</li>
+                    <li>يوجد لافتات إرشادية</li>
+                    <li>استفسر من المنظمين عند الوصول</li>
+                </ul>
+            </div>
+        `;
+        document.getElementById('infoModal').style.display = 'block';
+    }
+    
+    function closeModal() {
+        document.getElementById('infoModal').style.display = 'none';
+    }
+    
+    function showContactModal() {
+        document.getElementById('contactModal').style.display = 'block';
+    }
+    
+    function closeContactModal() {
+        document.getElementById('contactModal').style.display = 'none';
+    }
+    
+    // إغلاق النوافذ عند النقر خارجها
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('infoModal')) {
+            closeModal();
+        }
+        if (event.target == document.getElementById('contactModal')) {
+            closeContactModal();
+        }
+    }
+</script>
+
+<!-- Font Awesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
