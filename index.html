@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #1A4D8F;
@@ -92,6 +93,55 @@
             text-align: right;
             position: relative;
             z-index: 1;
+        }
+        
+        /* أنماط أزرار الرأس الجديدة */
+        .header-buttons {
+            display: flex;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .main-platform-btn, .documentation-btn {
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 15px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .main-platform-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, #2a5ba0 100%);
+            color: white;
+            border: 2px solid var(--primary);
+        }
+
+        .documentation-btn {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .main-platform-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(26, 77, 143, 0.3);
+        }
+
+        .documentation-btn:hover {
+            transform: translateY(-3px);
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 8px 20px rgba(26, 77, 143, 0.3);
+        }
+
+        .main-platform-btn i, .documentation-btn i {
+            margin-left: 8px;
+            font-size: 14px;
         }
         
         h1 {
@@ -529,6 +579,7 @@
             box-shadow: 0 8px 25px rgba(26, 77, 143, 0.4);
         }
         
+        /* تعديلات للهواتف */
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -541,6 +592,18 @@
             
             .header-text {
                 text-align: center;
+            }
+            
+            .header-buttons {
+                flex-direction: column;
+                width: 100%;
+                margin-top: 15px;
+            }
+            
+            .main-platform-btn, .documentation-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 10px;
             }
             
             .tabs {
@@ -585,6 +648,16 @@
                     <div class="subtitle">برامج وورش صيفية إثرائية</div>
                 </div>
             </div>
+            
+            <!-- الأزرار الجديدة -->
+            <div class="header-buttons">
+                <a href="https://sultanalwaeli.github.io/huthifa/" class="main-platform-btn" target="_blank">
+                    <i class="fas fa-home"></i> المنصة الرئيسية
+                </a>
+                <a href="https://sultanalwaeli.github.io/documentation/" class="documentation-btn" target="_blank">
+                    <i class="fas fa-file-alt"></i> توثيق الفعاليات
+                </a>
+            </div>
         </header>
         
         <div class="tabs">
@@ -594,7 +667,7 @@
         
         <!-- الأسبوع الأول -->
         <div id="week1" class="week active">
-            <!-- يوم الأحد -->
+           <!-- يوم الأحد -->
             <div class="day-container">
                 <div class="day-header">
                     <h2 class="day-title">الأحد</h2>
@@ -1331,3 +1404,5 @@
 
 <!-- Font Awesome for icons -->
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
